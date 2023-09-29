@@ -7,6 +7,9 @@ const nextConfig = {
   reactStrictMode: true,
   assetPrefix: branchName,
   basePath: branchName,
+  images: {
+    unoptimized: true,
+  }
 };
 
 module.exports = nextConfig;
