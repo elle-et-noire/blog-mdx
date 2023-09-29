@@ -9,7 +9,7 @@ import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
-import markdownToHtml from '../../lib/markdownToHtml'
+import markdownToMdxSource from '../../lib/markdownToMdxSource'
 import type PostType from '../../interfaces/post'
 
 type Props = {
@@ -68,7 +68,7 @@ export async function getStaticProps({ params }: Params) {
     'ogImage',
     'coverImage',
   ])
-  const content = await markdownToHtml(post.content || '')
+  const content = await markdownToMdxSource(post.content || '')
 
   return {
     props: {
