@@ -37,6 +37,7 @@ export default function Post({ post, morePosts, preview }: Props) {
                 <title>{title}</title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>
+              
               <PostHeader
                 title={post.title}
                 coverImage={post.coverImage}

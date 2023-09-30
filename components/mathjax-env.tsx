@@ -1,4 +1,4 @@
-import { MathJaxContext } from "better-react-mathjax";
+import { MathJaxContext, MathJax } from "better-react-mathjax";
 import React from "react";
 
 type Props = {
@@ -82,7 +82,9 @@ const MathJaxEnv = ({ children }: Props) => {
 
   return (
     <MathJaxContext version={3} config={config}>
-      {children}
+      <MathJax hideUntilTypeset="first">
+        {children}
+      </MathJax>
     </MathJaxContext>
   );
 }

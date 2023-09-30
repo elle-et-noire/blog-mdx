@@ -8,6 +8,7 @@ import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 import Post from '../interfaces/post'
 import { MathJax } from 'better-react-mathjax'
+import { TypesettingFunction } from 'better-react-mathjax/MathJaxContext/MathJaxContext'
 
 type Props = {
   allPosts: Post[]
@@ -24,8 +25,8 @@ export default function Index({ allPosts }: Props) {
         </Head>
         <Container>
           <Intro />
-          <MathJax>{"\\(\\ds\\frac{10}{4x} \\approx 2^{12}\\)"}</MathJax>uouo
-          <MathJax>{"$$\\int_{-\\infty}^\\infty \\dd{x} e^{-ax^2} = \\sqrt{\\dfrac{\\pi}{a}}\\quad (a\\in\\mathbb{R}_{>0})$$"}</MathJax>uouo
+          {"\\(\\ds\\frac{10}{4x} \\approx 2^{12}\\)"}uouo
+          {"$$\\int_{-\\infty}^\\infty \\dd{x} e^{-ax^2} = \\sqrt{\\dfrac{\\pi}{a}}\\quad (a\\in\\mathbb{R}_{>0})$$"}
           {heroPost && (
             <HeroPost
               title={heroPost.title}
