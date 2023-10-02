@@ -115,7 +115,7 @@ ${content}
       return `<span className='has-tooltip relative items-center no-underline'><span className='inline-block tooltip balloon'>${p1}</span>[^${footnum}]</span>`;
     }).concat(footnotes).replace(/(<(?:inmath|dispmath)\d+\/>)(\r?\n|<br\/>)/g, "$1") // 数式と文章の間の改行による隙間を消す
     .replace(/<((?:inmath|dispmath)\d+)\/>/g, (_, mode: string): string => {
-      if (mode.substring(0, 6) == "inmath") return "<MathJax hideUntilTypeset='first'><span>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</span></MathJax>";
+      if (mode.substring(0, 6) == "inmath") return "<MathJax inline hideUntilTypeset='first'><span>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</span></MathJax>";
       if (mode.substring(0, 8) == "dispmath") return "<MathJax hideUntilTypeset='first'><div className='scrollable'>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</div></MathJax>";
       return "";
     })
