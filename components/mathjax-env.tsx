@@ -1,8 +1,12 @@
-import { MathJaxContext, MathJax } from "better-react-mathjax";
-import React from "react";
+import { MathJaxContext, MathJax, MathJaxBaseContext, MathJax3Object } from "better-react-mathjax";
+import React, { useContext, useEffect, useRef } from "react";
 
 type Props = {
   children: React.ReactNode;
+}
+
+const isMathJax3Object = (mjObject: any): mjObject is MathJax3Object => {
+  return !!(mjObject as MathJax3Object)?.startup
 }
 
 const MathJaxEnv = ({ children }: Props) => {
@@ -82,9 +86,7 @@ const MathJaxEnv = ({ children }: Props) => {
 
   return (
     <MathJaxContext version={3} config={config}>
-      <MathJax hideUntilTypeset="first">
-        {children}
-      </MathJax>
+      {children}
     </MathJaxContext>
   );
 }

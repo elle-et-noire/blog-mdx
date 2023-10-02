@@ -2,6 +2,7 @@ import { remark } from 'remark'
 import html from 'remark-html'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
+import { MathJax } from 'better-react-mathjax'
 
 export default async function markdownToMdxSource(markdown: string): Promise<MDXRemoteSerializeResult> {
   const spacer = "\\hspace{0.2em}";
@@ -114,8 +115,8 @@ ${content}
       return `<span className='has-tooltip relative items-center no-underline'><span className='inline-block tooltip balloon'>${p1}</span>[^${footnum}]</span>`;
     }).concat(footnotes).replace(/(<(?:inmath|dispmath)\d+\/>)(\r?\n|<br\/>)/g, "$1") // 数式と文章の間の改行による隙間を消す
     .replace(/<((?:inmath|dispmath)\d+)\/>/g, (_, mode: string): string => {
-      if (mode.substring(0, 6) == "inmath") return "<span>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</span>";
-      if (mode.substring(0, 8) == "dispmath") return "<div className='scrollable'>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</div>";
+      if (mode.substring(0, 6) == "inmath") return "<MathJax hideUntilTypeset='first'><span>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</span></MathJax>";
+      if (mode.substring(0, 8) == "dispmath") return "<MathJax hideUntilTypeset='first'><div className='scrollable'>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</div></MathJax>";
       return "";
     })
     .replace(/<(quote\d+)\/>/g, (_, mode: string) => evacuees[mode].replace(/(^`{3,})([^`\r\n]+)/g, (__, p1: string, p2: string): string => {

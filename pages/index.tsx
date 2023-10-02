@@ -25,8 +25,8 @@ export default function Index({ allPosts }: Props) {
         </Head>
         <Container>
           <Intro />
-          {"\\(\\ds\\frac{10}{4x} \\approx 2^{12}\\)"}uouo
-          {"$$\\int_{-\\infty}^\\infty \\dd{x} e^{-ax^2} = \\sqrt{\\dfrac{\\pi}{a}}\\quad (a\\in\\mathbb{R}_{>0})$$"}
+          <MathJax hideUntilTypeset='first'>{"\\(\\ds\\frac{10}{4x} \\approx 2^{12}\\)"}uouo</MathJax>
+          <MathJax hideUntilTypeset='first'>{"$$\\int_{-\\infty}^\\infty \\dd{x} e^{-ax^2} = \\sqrt{\\dfrac{\\pi}{a}}\\quad (a\\in\\mathbb{R}_{>0})$$"}</MathJax>
           {heroPost && (
             <HeroPost
               title={heroPost.title}
