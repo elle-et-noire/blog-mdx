@@ -3,6 +3,8 @@ import '../styles/index.css'
 import MathJaxEnv from '../components/mathjax-env'
 import localFont from 'next/font/local'
 import Head from 'next/head'
+import Header from '../components/header'
+import Footer from '../components/footer'
 
 const applimincho = localFont({
   src: './AppliMincho.otf',
@@ -20,7 +22,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <MathJaxEnv>
         <div className={`text-normaltxt bg-[radial-gradient(ellipse_at_40px_40px,rgba(28,28,30,1)_30%,rgba(34,36,48,1)_50%,rgba(47,45,86,1)_70%,rgba(64,58,92,1)_80%,rgba(120,100,96,1)_100%)] bg-fixed ${applimincho.className}`}>
-          <Component {...pageProps} />
+          <Header />
+          <div className='mx-auto px-5 max-w-screen-md min-h-screen '>
+            <Component {...pageProps} />
+          </div>
+          <Footer />
         </div>
       </MathJaxEnv>
     </>

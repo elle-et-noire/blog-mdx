@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import Container from '../../components/container'
 import PostBody from '../../components/post-body'
 import PostHeader from '../../components/post-header'
-import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
@@ -22,26 +20,24 @@ export default function Post({ post }: Props) {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <Layout>
-      <Container>
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article className="mt-10 mb-32">
-              <Head>
-                <title>{title}</title>
-              </Head>
-              <PostHeader
-                title={post.title}
-                date={post.date}
-              />
-              <PostBody content={post.content} />
-            </article>
-          </>
-        )}
-      </Container>
-    </Layout>
+    <>
+      {router.isFallback ? (
+        <PostTitle>Loading…</PostTitle>
+      ) : (
+        <>
+          <article className="mt-10 mb-32">
+            <Head>
+              <title>{title}</title>
+            </Head>
+            <PostHeader
+              title={post.title}
+              date={post.date}
+            />
+            <PostBody content={post.content} />
+          </article>
+        </>
+      )}
+    </>
   )
 }
 
@@ -56,10 +52,7 @@ export async function getStaticProps({ params }: Params) {
     'title',
     'date',
     'slug',
-    'author',
     'content',
-    'ogImage',
-    'coverImage',
   ])
   const content = await markdownToMdxSource(post.content || '')
 
