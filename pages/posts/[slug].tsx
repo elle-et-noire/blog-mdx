@@ -14,35 +14,28 @@ import type PostType from '../../interfaces/post'
 
 type Props = {
   post: PostType
-  morePosts: PostType[]
-  preview?: boolean
 }
 
-export default function Post({ post, morePosts, preview }: Props) {
+export default function Post({ post }: Props) {
   const router = useRouter()
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`
+  const title = `${post.title} | ${CMS_NAME}`
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <Layout preview={preview}>
+    <Layout>
       <Container>
-        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="mb-32">
+            <article className="mt-10 mb-32">
               <Head>
                 <title>{title}</title>
-                <meta property="og:image" content={post.ogImage.url} />
               </Head>
-              
               <PostHeader
                 title={post.title}
-                coverImage={post.coverImage}
                 date={post.date}
-                author={post.author}
               />
               <PostBody content={post.content} />
             </article>
