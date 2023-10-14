@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./components/**/*.tsx', './pages/**/*.tsx'],
   theme: {
+    container: {
+      padding: "1rem"
+    },
     extend: {
       colors: {
         'accent-1': '#FAFAFA',
@@ -32,5 +35,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true })
+  ],
 }

@@ -41,6 +41,6 @@ $$
 
 そのような項はずばり、2点相関関数として$A_i$と$B_j$の間のもののみを含み、残りがすべて正規積になっている項である。$\nprod{\prod_i A_i\prod_j B_j}$とか$\ev{A_1B_2}\nprod{A_2A_3\cdots B_1B_3\cdots}$とか$\ev{A_1B_3}\ev{A_2B_1}\nprod{A_3\cdots B_2\cdots}$とかである。
 
-例えば初項同士から出てくる$\ev{A_1B_1}{A_2A_3}\nprods{\cdots}$のような項はどうか。この項は$\ev{\prod_i A_i}\prod_jB_j$も含む。$\ev{\prod_iA_i}$から出てくる$\ev{A_2A_3}\nprod{A_1\cdots}$と$B_1\cdots$から出てくる$\nprod{B_1\cdots}$の掛け算で、帰納的に正規積同士の積が$\ev{A_2A_3}\ev{A_1B_1}\nprod{\cdots}$となって出てくる。そしてこのような項は1回しか出てこず、きれいに打ち消してしまう。
+例えば初項同士から出てくる$\ev{A_1B_1}{A_2A_3}\nprod{\cdots}$のような項はどうか。この項は$\ev{\prod_i A_i}\prod_jB_j$も含む。$\ev{\prod_iA_i}$から出てくる$\ev{A_2A_3}\nprod{A_1\cdots}$と$B_1\cdots$から出てくる$\nprod{B_1\cdots}$の掛け算で、帰納的に正規積同士の積が$\ev{A_2A_3}\ev{A_1B_1}\nprod{\cdots}$となって出てくる。そしてこのような項は1回しか出てこず、きれいに打ち消してしまう。
 
 したがって残るのは上で述べたようなものだけである。
