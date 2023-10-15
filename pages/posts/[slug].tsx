@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import PostBody from '../../components/post-body'
-import PostHeader from '../../components/post-header'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
-import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToMdxSource from '../../lib/markdownToMdxSource'
 import type PostType from '../../interfaces/post'
+import DateFormatter from '../../components/date-formatter'
+import { MathJax } from 'better-react-mathjax'
+import Link from 'next/link'
+import { MDXRemote } from 'next-mdx-remote'
 
 type Props = {
   post: PostType
@@ -15,28 +16,29 @@ type Props = {
 
 export default function Post({ post }: Props) {
   const router = useRouter()
-  const title = `${post.title} | ${CMS_NAME}`
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
+  const MDXComponents: any = {
+    MathJax: MathJax,
+    a: Link
+  };
+
   return (
     <>
-      {router.isFallback ? (
-        <PostTitle>Loading…</PostTitle>
-      ) : (
-        <>
-          <article className="mt-10 mb-32">
-            <Head>
-              <title>{title}</title>
-            </Head>
-            <PostHeader
-              title={post.title}
-              date={post.date}
-            />
-            <PostBody content={post.content} />
-          </article>
-        </>
-      )}
+      <Head>
+        <title>{`${post.title} | ${CMS_NAME}`}</title>
+      </Head>
+      <article>
+        <h1 className="text-5xl font-bold tracking-tighter leading-tight mb-12 text-center">
+          {post.title}
+        </h1>
+        <div className="text-sm text-right italic text-slate-500">
+          <DateFormatter dateString={post.date} />
+        </div>
+        <MDXRemote {...post.content} components={MDXComponents} />
+      </article>
     </>
   )
 }

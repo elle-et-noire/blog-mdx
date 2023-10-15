@@ -113,8 +113,8 @@ ${content}
       return `<span className='has-tooltip relative items-center no-underline'><span className='inline-block tooltip balloon'>${p1}</span>[^${footnum}]</span>`;
     }).concat(footnotes).replace(/(<(?:inmath|dispmath)\d+\/>)(\r?\n|<br\/>)/g, "$1") // 数式と文章の間の改行による隙間を消す
     .replace(/<((?:inmath|dispmath)\d+)\/>/g, (_, mode: string): string => {
-      if (mode.substring(0, 6) == "inmath") return "<MathJax inline hideUntilTypeset='first'><span>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</span></MathJax>";
-      if (mode.substring(0, 8) == "dispmath") return "<MathJax hideUntilTypeset='first'><div className='scrollable'>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</div></MathJax>";
+      if (mode.substring(0, 6) == "inmath") return "<span>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</span>";
+      if (mode.substring(0, 8) == "dispmath") return "<div className='scrollable'>{`" + evacuees[mode].replace(/\\/g, "\\\\") + "`}</div>";
       return "";
     })
     .replace(/<(quote\d+)\/>/g, (_, mode: string) => evacuees[mode].replace(/(^`{3,})([^`\r\n]+)/g, (__, p1: string, p2: string): string => {
@@ -122,12 +122,12 @@ ${content}
       return p1 + titles[0].replace(/diff\s/, "diff-") + (titles.length > 1 ? ("[data-file='" + titles[1] + "']") : '');
     }).replace(/^(`{3,})mermaid([^`]+)\1/g, "\n<div className='mermaid'>{`%%{init:{'theme':'base','themeVariables':{'primaryColor':'#007777','primaryTextColor':'#f0f6fc','primaryBorderColor':'#008888','secondaryColor':'#145055','tertiaryColor': '#fff0f0','edgeLabelBackground':'#002b3600','lineColor':'#007777CC','noteTextColor':'#e2e8f0','noteBkgColor':'#007777BB','textColor':'#f0f6fc','fontSize':'16px'},'themeCSS':'text.actor {font-size:20px !important;}'}}%%$2`}</div>\n")
   );
-  const mdxSource = await serialize(processible, {
-    mdxOptions: {
-      remarkPlugins: [
-        gfm
-      ]
-    }
+  const mdxSource = await serialize(`<MathJax hideUntilTypeset='first'>${processible}</MathJax>`, {
+    // mdxOptions: {
+    //   remarkPlugins: [
+    //     gfm
+    //   ]
+    // }
   })
   return mdxSource
 }
